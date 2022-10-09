@@ -196,6 +196,7 @@ def start_recording(data_config, daq_config, run_name, no_hv):
 def start_run(
     obs_config, daq_config, quabo_uids, data_config, no_hv, no_redis, no_data
 ):
+    
     my_ip = util.local_ip()
     if my_ip != daq_config['head_node_ip_addr']:
         print('This node (%s) is not the head node specified in daq_config.json (%s)'%(my_ip, daq_config['head_node_ip_addr']))

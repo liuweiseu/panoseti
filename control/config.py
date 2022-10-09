@@ -110,15 +110,18 @@ def do_ping(modules):
             else:
                 print("can't ping %s"%ip_addr)
 
-def do_hk_dest(modules):
-    my_ip_addr = util.local_ip()
+def do_hk_dest(modules, daq_config):
+    #my_ip_addr = util.local_ip()
+    hk_destination = daq_config['hk_destination']
+    #print(hk_destination)
     for module in modules:
         for i in range(4):
             uid = util.quabo_uid(module, quabo_uids, i)
             if uid == '': continue
             ip_addr = config_file.quabo_ip_addr(module['ip_addr'], i)
             quabo = quabo_driver.QUABO(ip_addr)
-            quabo.hk_packet_destination(my_ip_addr)
+            #quabo.hk_packet_destination(my_ip_addr)
+            quabo.hk_packet_destination(hk_destination)
             quabo.close()
 
 def do_hv_on(modules, quabo_uids, quabo_info, detector_info):
@@ -305,7 +308,7 @@ if __name__ == "__main__":
     config_file.associate(daq_config, quabo_uids)
     if op == 'reboot':
         do_reboot(modules, quabo_uids)
-        do_hk_dest(modules)
+        do_hk_dest(modules, daq_config)
     elif op == 'loads':
         do_loads(modules, quabo_uids)
     elif op == 'ping':
@@ -313,7 +316,7 @@ if __name__ == "__main__":
     elif op == 'init_daq_nodes':
         file_xfer.copy_hashpipe(daq_config)
     elif op == 'hk_dest':
-        do_hk_dest(modules)
+        do_hk_dest(modules, daq_config)
     elif op == 'redis_daemons':
         util.start_redis_daemons()
     elif op == 'stop_redis_daemons':

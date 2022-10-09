@@ -7,7 +7,7 @@ import redis
 
 
 def redis_init():
-    return redis.Redis(host='localhost', port=6379, db=0)
+    return redis.Redis(host='panoseti-redis', port=6379, db=0)
 
 
 def store_in_redis(r: redis.Redis, rkey: [bytes, str], rkey_fields: dict):
