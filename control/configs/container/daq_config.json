@@ -1,0 +1,15 @@
+{
+    "comment": "container as head node, host computer as DAQ node",
+    "head_node_data_dir": "/home/panoseti/headnode/data",
+    "head_node_ip_addr": "10.0.0.199",
+    "head_node_container": true,
+    "daq_nodes": [
+        {
+            "username": "wei",
+            "data_dir": "/xx/panoseti-pod/data/daq",
+            "ip_addr": "10.0.0.199",
+            "module_ids": "0-255",
+            "bindhost": "enp3s0"
+        }
+    ]
+}
