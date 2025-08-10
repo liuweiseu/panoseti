@@ -138,12 +138,20 @@ def stop_run(
 ):
     # convert head node name to IP address
     head_node_ip = socket.gethostbyname(daq_config['head_node_ip_addr'])
-    if head_node_ip not in local_ip():
-        raise Exception(
-            'This computer (%s) is not the head node specified in daq_config.json (%s)'%(
-                local_ip(), daq_config['head_node_ip_addr']
+    head_node_container = False
+    if 'head_node_container' in daq_config:
+        if daq_config['head_node_container']:
+            head_node_container = True
+    if head_node_container:
+        print('Containerized head node.')
+        print('Skip head node')
+    else:
+        if head_node_ip not in local_ip():
+            raise Exception(
+                'This computer (%s) is not the head node specified in daq_config.json (%s)'%(
+                    local_ip(), daq_config['head_node_ip_addr']
+                )
             )
-        )
 
     if not run:
         run = read_run_name()

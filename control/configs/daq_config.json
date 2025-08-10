@@ -2,6 +2,7 @@
     "comment": "gateway as head node, two daq nodes as DAQ nodes",
     "head_node_data_dir": "/data/panoseti/data",
     "head_node_ip_addr": "192.168.88.1",
+    "head_node_container": false,
     "daq_nodes": [
         {
             "username": "panoseti",

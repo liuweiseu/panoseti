@@ -283,9 +283,17 @@ def start_run(
     my_ip = util.local_ip()
     # convert head node name to IP address
     head_node_ip = socket.gethostbyname(daq_config['head_node_ip_addr'])
-    if  head_node_ip not in my_ip:
-        print('This node (%s) is not the head node specified in daq_config.json (%s)'%(my_ip, daq_config['head_node_ip_addr']))
-        return False
+    head_node_container = False
+    if 'head_node_container' in daq_config:
+        if daq_config['head_node_container']:
+            head_node_container = True
+    if head_node_container:
+        print('Containerized head node.')
+        print('Skip head node')
+    else:
+        if  head_node_ip not in my_ip:
+            print('This node (%s) is not the head node specified in daq_config.json (%s)'%(my_ip, daq_config['head_node_ip_addr']))
+            return False
 
     rn = util.read_run_name()
     if (rn):

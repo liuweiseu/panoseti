@@ -27,7 +27,10 @@ def main():
 
     # if the HK recorder is running on a remote DAQ, we didn't start it.
     # But it shouldn't be there, so kill it
-    util.kill_hk_recorder()
+    
+    # Not sure why we need to kill hk recorder on daq nodes.
+    # So I comment it out.
+    # util.kill_hk_recorder()
 
     try:
         os.unlink(util.daq_run_name_filename)
